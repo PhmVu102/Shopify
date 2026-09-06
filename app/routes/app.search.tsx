@@ -17,13 +17,15 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     where: { deletedAt: null },
   });
 
-  const vectorCount = await prisma.productVector.count({
-    where: {
-      product: {
-        deletedAt: null,
-      },
-    },
-  });
+  const vectorCount = (prisma as any).productVector
+    ? await prisma.productVector.count({
+        where: {
+          product: {
+            deletedAt: null,
+          },
+        },
+      })
+    : 0;
 
   let searchResult = null;
   if (query.trim()) {

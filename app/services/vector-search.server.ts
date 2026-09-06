@@ -53,6 +53,15 @@ export async function searchProductsBySemantic(
     await generateEmbedding(trimmedQuery);
 
   // 2. Lấy tất cả vector của các sản phẩm còn hoạt động (chưa bị xóa)
+  if (!(prisma as any).productVector) {
+    return {
+      query: trimmedQuery,
+      totalIndexed: 0,
+      results: [],
+      modelUsed,
+    };
+  }
+
   const productVectors = await prisma.productVector.findMany({
     where: {
       product: {
