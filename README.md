@@ -291,3 +291,5 @@ Trước khi gọi API embedding (vốn tiêu tốn thời gian và chi phí), h
        }
      }
      ```
+#   S h o p i f y  
+ 
